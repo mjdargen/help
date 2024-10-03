@@ -1,0 +1,70 @@
+digraph G {
+    // global attributes
+    rankdir=TB; // top to bottom layout
+    // splines=ortho; // orthogonal edges for clarity
+    nodesep=0.7; // increase space between nodes
+    ranksep=1.2; // increase vertical space between levels
+    
+    // create and label nodes
+    start[label="start", shape=rectangle, style=filled, fillcolor="#ffb428"];
+    help[label="Need some help?", shape=diamond, style=filled, fillcolor="#fbeab3"];
+    need[label="What do you need?", shape=diamond, style=filled, fillcolor="#fbeab3"];
+    in_class[label="Are you in class?", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    in_class_question[label="Help options:", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    school_day[label="Is it during the school day?", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    during_school[label="Help options:", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    outside_school[label="Help options:", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    feedback[label="How would you like to provide feedback?", shape=diamond, style=filled, fillcolor="#cbf3f0"];
+    answered[label="Still need help?", shape=diamond, style=filled, fillcolor="#d9ed92"];
+    improve[label="Did the situation improve?", shape=diamond, style=filled, fillcolor="#cbf3f0"];
+    convos[label="Have you had multiple conversations?", shape=diamond, style=filled, fillcolor="#cbf3f0"];
+    chair[label="Talk with the CS chair", shape=oval, style=filled, fillcolor="#cbf3f0"];
+    end[label="Congrats, you should excel in this course!", shape=rectangle, style=filled, fillcolor="#ffb428"];
+    
+    // define ranks to align nodes
+    { rank=same; start; }
+    { rank=same; help; }
+    { rank=same; need; }
+    { rank=same; in_class; school_day; feedback }
+    { rank=same; in_class_question; during_school; outside_school improve; convos; }
+    { rank=same; answered; chair }
+    { rank=same; end}
+    
+    // create and label edges
+    start -> help;
+    help -> need[label="Yes!"];
+    help -> end[label="Nope!"];
+    
+    need -> in_class[label="I have a question about a concept or assignment"];
+    in_class -> in_class_question[label="Yes"];
+    in_class -> school_day[label="No"];
+    
+    in_class_question -> answered[label="Ask Mr. D"];
+    in_class_question -> answered[label="Ask a classmate"];
+    
+    school_day -> during_school[label="Yes"];
+    school_day -> outside_school[label="No"];
+    
+    during_school -> answered[label="Go to Mr. D's office hours"];
+    during_school -> answered[label="Go to TA tutorial sessions"];
+    during_school -> answered[label="Make an appointment with Mr. D"];
+    
+    outside_school -> answered[label="Email Mr. D"];
+    outside_school -> answered[label="Email the TAs"];
+    
+    answered -> end[label="Nope!"];
+    answered -> in_class[label="Yes!"];
+    
+    need -> feedback[label="Something about the course isn't working for me"];
+    feedback -> improve[label="Talk with Mr. D"];
+    feedback -> improve[label="Email Mr. D"];
+    feedback -> improve[label="Submit through anonymous form on Canvas"];
+    
+    improve -> end[label="Yes!"];
+    improve -> convos[label="Nope..."];
+    
+    convos -> chair[label="Yes"];
+    convos -> feedback[label="No"];
+    
+    chair -> improve;
+}
