@@ -1,5 +1,5 @@
 function showImage() {
-    var img = document.getElementById("hiddenDiv");
+    var img = document.getElementById("hiddenImg");
     var btn = document.getElementById("hideButton");
     // Toggle display of the image
     var computedStyle = window.getComputedStyle(img).display;

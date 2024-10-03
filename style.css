@@ -28,6 +28,7 @@ button {
 	font-family: monospace;
 }
 
-#hiddenDiv {
+#hiddenImg {
 	display: none;
+	width: 100%;
   }
